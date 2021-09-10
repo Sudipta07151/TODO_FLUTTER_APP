@@ -4,6 +4,10 @@ import '../WidgetsFolder/app_bar.dart';
 import 'bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import '../models/task_data.dart';
+import '../WidgetsFolder/login_button.dart';
+import '../WidgetsFolder/logout_button.dart';
+import '../WidgetsFolder/badges.dart';
+
 import 'dart:async';
 
 class TasksScreen extends StatelessWidget {
@@ -27,13 +31,7 @@ class TasksScreen extends StatelessWidget {
                       MaterialStateProperty.all(Colors.orange.shade50),
                 ),
               ),
-              child: OutlinedButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.login,
-                  color: Colors.red.shade700,
-                ),
-              ),
+              child: LoginButton(),
             ),
           )
         ],
@@ -96,38 +94,25 @@ class TasksScreen extends StatelessWidget {
                 ),
                 Column(
                   children: <Widget>[
-                    Text(
-                      'Done ${Provider.of<TaskData>(context).tasksDone}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.green.shade400,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Badges(
+                        colour: Colors.green.shade500,
+                        text: 'DONE',
+                        time: Provider.of<TaskData>(context).tasksDone),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Badges(
+                      colour: Colors.yellow.shade700,
+                      text: 'TimeUp',
+                      time: Provider.of<TaskData>(context).tasksTimeUp,
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Text(
-                      'TimeUp ${Provider.of<TaskData>(context).tasksTimeUp}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.yellow.shade700,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      'Left ${Provider.of<TaskData>(context).tasksLeftToDo}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.yellow.shade700,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Badges(
+                      colour: Colors.red,
+                      text: 'Left',
+                      time: Provider.of<TaskData>(context).tasksLeftToDo,
                     ),
                   ],
                 )
