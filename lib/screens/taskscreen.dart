@@ -4,10 +4,10 @@ import '../WidgetsFolder/app_bar.dart';
 import 'bottom_sheet.dart';
 import 'package:provider/provider.dart';
 import '../models/task_data.dart';
-import '../WidgetsFolder/login_button.dart';
-import '../WidgetsFolder/logout_button.dart';
 import '../WidgetsFolder/badges.dart';
-
+import '../WidgetsFolder/login_logout_wrapper.dart';
+import '../models/user.dart' as u;
+import '../services/auth.dart';
 import 'dart:async';
 
 class TasksScreen extends StatelessWidget {
@@ -21,18 +21,21 @@ class TasksScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: OutlinedButtonTheme(
-              data: OutlinedButtonThemeData(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  minimumSize: MaterialStateProperty.all(
-                    Size.fromWidth(80),
+                data: OutlinedButtonThemeData(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.white),
+                    minimumSize: MaterialStateProperty.all(
+                      Size.fromWidth(80),
+                    ),
+                    overlayColor:
+                        MaterialStateProperty.all(Colors.orange.shade50),
                   ),
-                  overlayColor:
-                      MaterialStateProperty.all(Colors.orange.shade50),
                 ),
-              ),
-              child: LoginButton(),
-            ),
+                child: StreamProvider<u.User?>.value(
+                  initialData: null,
+                  child: LoginLogoutWrapper(),
+                  value: AuthService().user,
+                )),
           )
         ],
       ),

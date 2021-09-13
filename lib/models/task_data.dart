@@ -24,15 +24,20 @@ class TaskData extends ChangeNotifier {
   }
 
   int get tasksTimeUp {
-    const oneSec = Duration(seconds: 1);
-    Timer.periodic(oneSec, (Timer t) {
-      timeup = (_tasks
-              .where((element) => DateTime.now().compareTo(element.time) > 0)
-              .toList())
-          .length;
-      print('RUNNING');
-      notifyListeners();
-    });
+    // const oneSec = Duration(seconds: 1);
+    // Timer.periodic(oneSec, (Timer t) {
+    //   timeup = (_tasks
+    //           .where((element) => DateTime.now().compareTo(element.time) > 0)
+    //           .toList())
+    //       .length;
+    //   print('RUNNING');
+    //   notifyListeners();
+    // });
+    timeup = (_tasks
+            .where((element) => DateTime.now().compareTo(element.time) > 0)
+            .toList())
+        .length;
+
     return timeup;
   }
 
