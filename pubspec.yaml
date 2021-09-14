@@ -33,6 +33,8 @@ flutter:
   assets:
     - images/girl_login.png
     - images/atomicDelivery.png
+    - images/fail.png
+    - images/success.png
     # fonts:
   #   - family: Schyler
   #     fonts:

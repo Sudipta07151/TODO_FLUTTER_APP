@@ -3,6 +3,7 @@ import '../WidgetsFolder/form_button.dart';
 import '../WidgetsFolder/form_text_field.dart';
 import '../screens/register_screen.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../services/auth.dart' as auth;
 import '../WidgetsFolder/spinner.dart';
 
@@ -108,7 +109,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                   });
                                   return loginFormObj;
                                 },
-                                processDone: (val) => {},
+                                processDone: (val) => {
+                                  if (val == false)
+                                    {
+                                      setState(() {
+                                        loading = false;
+                                      }),
+                                      Alert(
+                                        context: context,
+                                        desc: "SOMETHING WENT WRONG",
+                                        image: Image.asset("images/fail.png"),
+                                      ).show()
+                                    }
+                                },
                               ),
                               SizedBox(
                                 height: 40,
@@ -141,9 +154,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                       await authService.signInAnonymous();
                                   if (userData == null) {
                                     print('error sigining in');
+
                                     setState(() {
                                       loading = false;
                                     });
+                                    Alert(
+                                      context: context,
+                                      title: "SOMETHING WENT WRONG",
+                                      desc: "CHECK YOUR INTERNET CONNECTION",
+                                      image: Image.asset("images/fail.png"),
+                                    ).show();
                                   } else {
                                     print(userData.uid);
                                   }

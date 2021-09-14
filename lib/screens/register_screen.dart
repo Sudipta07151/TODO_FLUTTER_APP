@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import '../WidgetsFolder/form_button.dart';
 import '../WidgetsFolder/form_text_field.dart';
 import '../WidgetsFolder/spinner.dart';
@@ -122,6 +123,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       setState(() {
                                         loading = false;
                                       })
+                                    }
+                                  else
+                                    {
+                                      setState(() {
+                                        loading = false;
+                                      }),
+                                      Alert(
+                                        context: context,
+                                        desc: "SOMETHING WENT WRONG",
+                                        image: Image.asset("images/fail.png"),
+                                      ).show()
                                     }
                                 },
                               ),
