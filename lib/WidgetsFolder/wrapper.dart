@@ -10,8 +10,10 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<u.User?>(context);
     print(user);
     if (user == null) {
+      print('NO USER');
       return LoginScreen();
     } else {
+      print('GOT USER');
       return TasksScreen();
     }
   }

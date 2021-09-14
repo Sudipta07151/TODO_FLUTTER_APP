@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../WidgetsFolder/form_button.dart';
 import '../WidgetsFolder/form_text_field.dart';
 import '../screens/register_screen.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:email_validator/email_validator.dart';
 import '../services/auth.dart' as auth;
 import '../WidgetsFolder/spinner.dart';
 
@@ -91,11 +91,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                 text: 'LOGIN',
                                 getValuesCallback: () {
                                   var loginFormObj = new Map();
+                                  if (!EmailValidator.validate(
+                                          emailController.text) ||
+                                      passwordController.text == '') {
+                                    return null;
+                                  }
+                                  loginFormObj['form'] = 'register';
                                   loginFormObj['email'] = emailController.text;
                                   loginFormObj['password'] =
                                       passwordController.text;
+                                  emailController.text = '';
+                                  passwordController.text = '';
                                   return loginFormObj;
                                 },
+                                processDone: (val) =>
+                                    print('GOT VAL AFTER CLICK'),
                               ),
                               SizedBox(
                                 height: 40,
