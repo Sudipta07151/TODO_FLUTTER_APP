@@ -31,8 +31,20 @@ class FormButton extends StatelessWidget {
             } else {
               processDone(true);
             }
-          } else
-            print('LOGIN');
+          } else if (val["form"].toString() == "login") {
+            final authService = AuthService();
+            print('called login function $val');
+            dynamic result = await authService.signinWithEmailPassword(
+                val["email"].toString(), val["password"].toString());
+            if (result == null) {
+              print('ERROR');
+              processDone(false);
+            } else {
+              processDone(true);
+            }
+          }
+        } else {
+          print('GOT NULL FROM FORM');
         }
         print('VALUE GOT is $val');
       },

@@ -100,12 +100,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   loginFormObj['email'] = emailController.text;
                                   loginFormObj['password'] =
                                       passwordController.text;
+                                  loginFormObj['form'] = 'login';
                                   emailController.text = '';
                                   passwordController.text = '';
+                                  setState(() {
+                                    loading = true;
+                                  });
                                   return loginFormObj;
                                 },
-                                processDone: (val) =>
-                                    print('GOT VAL AFTER CLICK'),
+                                processDone: (val) => {},
                               ),
                               SizedBox(
                                 height: 40,
